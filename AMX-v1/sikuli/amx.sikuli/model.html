@@ -1,0 +1,182 @@
+
+<html>
+   <head>
+      <style type="text/css">
+         .sikuli-code {
+            font-size: 20px;
+            font-family: "Osaka-mono", Monospace;
+            line-height: 1.5em;
+            display:table-cell;
+            white-space: pre-wrap;       /* css-3 */
+            white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+            white-space: -pre-wrap;      /* Opera 4-6 */
+            white-space: -o-pre-wrap;    /* Opera 7 */
+            word-wrap: break-word;       /* Internet Explorer 5.5+ */
+            width: 99%;   /* remove horizontal scroll-bar when viewing in IE7 */
+         }
+         .sikuli-code img {
+            vertical-align: middle;
+            margin: 2px;
+            border: 1px solid #ccc;
+            padding: 2px;
+            -moz-border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-box-shadow: 1px 1px 1px gray;
+            -webkit-box-shadow: 1px 1px 2px gray;
+         }
+         .kw {
+            color: blue;
+         }
+         .skw {
+            color: rgb(63, 127, 127);
+         }
+
+         .str {
+            color: rgb(128, 0, 0);
+         }
+
+         .dig {
+            color: rgb(128, 64, 0);
+         }
+
+         .cmt {
+            color: rgb(200, 0, 200);
+         }
+
+         h2 {
+            display: inline;
+            font-weight: normal;
+         }
+
+         .info {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            display: none;
+         }
+
+         a {
+            color: #9D2900;
+         }
+
+         body {
+            font-family: "Trebuchet MS", Arial, Sans-Serif;
+         }
+
+      </style>
+   </head>
+<body>
+<div class="info">
+<h2>amx.sikuli\amx.sikuli</h2> <a href="amx.sikuli\amx.zip">(Download this script)</a>
+</div>
+<pre class="sikuli-code">
+<span class="kw">import</span> simplejson <span class="kw">as</span> json
+<span class="cmt"># the data structure that encapsulates the current
+</span><span class="cmt"># state of the AMX control, such as the current 
+</span><span class="cmt"># active page, active buttons.
+</span><span class="kw">class</span> Model:
+        <span class="cmt"># static variables:
+</span>        <span class="cmt"># maps page to a list of clickable buttons on that page
+</span>        pages = {
+                <span class="str">'audio'</span>:[],
+                <span class="str">'lights'</span>:[],
+                <span class="str">'proj'</span>:[<span class="str">'powerOff'</span>,
+                        <span class="str">'powerOn'</span>,
+                        <span class="str">'imageBlank'</span>,
+                        <span class="str">'PC1VGA1400x1050'</span>,
+                        <span class="str">'docCam'</span>,
+                        <span class="str">'laptopVGA1400x1050'</span>,
+                        <span class="str">'video'</span>,
+                        <span class="str">'laptopDVI'</span>],
+                <span class="str">'specialFunction'</span>:[],
+                <span class="str">'systemReset'</span>:[]
+                };
+        <span class="kw">def</span> __init__(self):
+                self.resetButtonState();
+
+        <span class="kw">def</span> resetButtonState(self):
+                <span class="cmt"># maps each button to a boolean indicating
+</span>                <span class="cmt"># if it is on/off.
+</span>                self.buttons =  {
+                        <span class="str">'audio'</span>:False,
+                        <span class="str">'lights'</span>:False,
+                        <span class="str">'allOn'</span>:False,
+                        <span class="str">'nightLight'</span>:False,
+                        <span class="str">'allOff'</span>:False,
+                        <span class="str">'brightRoom'</span>:False,
+                        <span class="str">'mediumRoom'</span>:False,
+                        <span class="str">'projectionPreset'</span>:False,
+                        <span class="str">'wallCamsOn'</span>:False,
+                        <span class="str">'boardFluoroOn'</span>:False,
+                        <span class="str">'roomFluoroOn'</span>:False,
+                        <span class="str">'podiumOn'</span>:False,
+                        <span class="str">'walCamsOff'</span>:False,
+                        <span class="str">'boardFluoroOff'</span>:False,
+                        <span class="str">'roomFluoroOff'</span>:False,
+                        <span class="str">'podiumOff'</span>:False,
+                        <span class="str">'proj'</span>:False,
+                        <span class="str">'powerOff'</span>:False,
+                        <span class="str">'powerOn'</span>:False,
+                        <span class="str">'imageBlank'</span>:False,
+                        <span class="str">'PC1VGA1400x1050'</span>:False,
+                        <span class="str">'docCam'</span>:False,
+                        <span class="str">'laptopVGA1400x1050'</span>:False,
+                        <span class="str">'video'</span>:False,
+                        <span class="str">'laptopDVI'</span>:False,
+                        <span class="str">'up'</span>:False,
+                        <span class="str">'stop'</span>:False,
+                        <span class="str">'down'</span>:False,
+                        <span class="str">'systemReset'</span>:False
+                }
+
+        <span class="cmt"># given the json obejct representing the expected
+</span>        <span class="cmt"># state of buttons, calculate the difference between
+</span>        <span class="cmt"># the current state and the expected state
+</span>        <span class="cmt"># returns a list of buttons that needs to be clicked
+</span>        <span class="kw">def</span> diff(self,jsonFromServer):
+                diff_list = []
+                expected = json.loads(jsonFromServer);
+                <span class="kw">for</span> button <span class="kw">in</span> self.buttons.keys():
+                        <span class="kw">if</span> self.buttons[button] != expected[button]:
+                                diff_list.append(button);
+
+                <span class="kw">return</span> diff_list;
+
+
+<span class="kw">import</span> sys
+args = sys.argv
+<span class="cmt">#jsonFromServer = args[1];
+</span>jsonFromServer =  <span class="str">'''{
+        "audio.jpg":false,
+        "lights.jpg":false,
+        "allOn.jpg":false,
+        "nightLight.jpg":false,
+        "allOff.jpg":false,
+        "brightRoom.jpg":false,
+        "mediumRoom.jpg":false,
+        "projectionPreset.jpg":false,
+        "wallCamsOn.jpg":false,
+        "boardFluoroOn.jpg":false,
+        "roomFluoroOn.jpg":false,
+        "podiumOn.jpg":false,
+        "walCamsOff.jpg":false,
+        "boardFluoroOff.jpg":false,
+        "roomFluoroOff.jpg":false,
+        "podiumOff.jpg":false,
+        "proj.jpg":false,
+        "powerOff.jpg":false,
+        "powerOn.jpg":false,
+        "imageBlank.jpg":false,
+        "PC1VGA1400x1050.jpg":false,
+        "docCam.jpg":false,
+        "laptopVGA1400x1050.jpg":false,
+        "video.jpg":false,
+        "laptopDVI.jpg":false,
+        "up.jpg":false,
+        "stop.jpg":false,
+        "down.jpg":false,
+        "systemReset.jpg":false
+}'''</span>
+</pre>
+</body>
+</html>

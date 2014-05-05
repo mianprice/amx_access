@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="mainLayout.css">
+		<link id="containerStyle" rel="stylesheet" type="text/css" href="mainLayout.css">
+		<title>Main</title>
+		<script src="jquery-1.11.0.min.js"></script>
+		<script src="mainHelper.js"></script>
+		<link rel="stylesheet" href="resources/qunit-1.14.0.css">
+	</head>
+	
+	<body>
+		<div id="main">
+			
+			<div id="topBar">
+				<div id="audio" class="button">
+					Audio
+				</div>
+				
+				<div id="lights" class="button">
+					Lights
+				</div>
+				
+				<div id="proj" class="button">
+					Proj.
+				</div>
+				
+				<div id="specialFunctions" class="button">
+					Special Functions
+				</div>
+				
+				<div id="systemReset" class="button">
+					System Reset
+				</div>
+			</div>
+			
+			<div id="contentContainer" >
+			
+			</div>
+		</div>
+
+		<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+<script src="resources/qunit-1.14.0.js"></script>
+<script type="text/javascript">
+	asyncTest("projector page test",  function(){
+		
+		$("#proj").trigger('click');
+		setTimeout(function(){
+		equal(getButtonClickReturn(), false, "Should always return false since no server side code is executed for pressing top bar buttons.");
+		start();},10000);
+	});
+
+	asyncTest("Power On button push", function(){
+				$("#powerOn").trigger('click');
+				setTimeout(function(){
+		equal(getButtonClickInContainerReturn(),false,"expecting false when server not running.");
+		start();},10000);
+	});
+</script>
+<!--Scripts define the different scenarios-->
+<script type="text/javascript">
+	asyncTest("projector2 page test",  function(){
+		
+		$("#proj").trigger('click');
+		setTimeout(function(){
+		equal(getButtonClickReturn(), false, "Should always return false since no server side code is executed for pressing top bar buttons.");
+		start();},10000);
+	});
+
+	asyncTest("Power On3 button push", function(){
+				$("#powerOn").trigger('click');
+				setTimeout(function(){
+		equal(getButtonClickInContainerReturn(),false,"expecting false when server not running.");
+		start();},10000);
+	});
+</script>
+	
+	
+	</body>
+
+
+</html>

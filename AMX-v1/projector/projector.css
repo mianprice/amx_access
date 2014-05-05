@@ -1,0 +1,104 @@
+*{
+	margin:0px;
+	padding:0px;
+}
+
+#projectorMain{
+	width:500px;
+}
+
+#frontProjector{
+	position:absolute;
+	left:15px;
+	background-color:#FF6600;
+	border:1px solid black;
+	width:230px;
+	height:300px;
+}
+
+#rearProjector{
+	position:absolute;
+	left:255px;
+	background-color:#FF6600;
+	border:1px solid black;
+	width:230px;
+	height:300px;
+}
+
+#powerOffF, #powerOffR, #powerOff3{
+	position:absolute;
+	background-color:white;
+	height:50px;
+	width:95px;
+	top:25px;
+	left:15px;
+	text-align:center;
+}
+
+#powerOnF, #powerOnR, #powerOn3{
+	position:absolute;
+	background-color:white;
+	height:50px;
+	width:95px;
+	top:25px;
+	left:120px;
+	text-align:center;
+}
+
+#imageBlankF, #imageBlankR, #imageBlank3{
+	position:absolute;
+	background-color:white;
+	height:50px;
+	width:180px;
+	top:85px;
+	left:25px;
+	text-align:center;
+}
+
+#cpu1F, #lDVIF, #codecF, #cpu2F, #lVGAF, #catvInF, #cpu1R, #lDVIR, #codecR, #cpu2R, #lVGAR, #catvInR, #cpu13, #lDVI3, #codec3, #cpu23, #lVGA3, #catvIn3{
+	position:absolute;
+	background-color:white;
+	height:50px;
+	width:60px;
+	text-align:center;
+}
+
+#computer1F, #laptopDVIF, #codecF, #computer2F, #laptopVGAF, #catvInputF, #computer1R, #laptopDVIR, #computer2R, #laptopVGAR, #catvInputR, #computer13, #laptopDVI3, #computer23, #laptopVGA3, #catvInput3{
+	position:absolute;
+	background-color:white;
+	height:50px;
+	width:60px;
+	text-align:center;
+}
+
+#cpu1F, #lDVIF, #codecF, #cpu1R, #lDVIR, #codecR, #cpu13, #lDVI3, #codec3, #computer1F, #laptopDVIF, #codecF, #computer1R, #laptopDVIR, #computer13, #laptopDVI3{
+	top:145px;
+}
+
+#cpu2F, #lVGAF, #catvInF, #cpu2R, #lVGAR, #catvInR, #cpu23, #lVGA3, #catvIn3, #computer2F, #laptopVGAF, #catvInputF, #computer2R, #laptopVGAR, #catvInputR, #computer23, #laptopVGA3, #catvInput3{
+	top:205px;
+}
+
+#cpu1F, #cpu2F, #cpu13, #cpu23, #computer1F, #computer2F, #computer13, #computer23{
+	left:15px;
+}
+
+#lDVIF, #lVGAF, #lDVI3, #lVGA3, #laptopDVIF, #laptopVGAF, #laptopDVI3, #laptopVGA3{
+	left:85px;
+}
+
+#codecF, #catvInF, #codec3, #catvIn3, #catvInputF, #catvInput3{
+	left:155px;
+}
+
+#cpu1R, #cpu2R, #computer1R, #computer2R{
+	left:15px;
+}
+
+#lDVIR, #lVGAR, #laptopDVIR, #laptopVGAR{
+	left:85px;
+}
+
+#codecR, #catvInR, #catvInputR{
+	left:155px;
+}
